@@ -153,11 +153,17 @@ Planta = ss(SSaP.a+SSaA.a, SSaP.b+SSaA.b ,[SSaP.c;SSaA.c], 0)
 ## SIsO = ss2_TF(Planta)
 ## disp('______Devuelve una matriz con dos filas, pero una vale 0, es decir, solo hay una salida_________')
 
+ % Punto 9: control del sistema.
+
 B = Planta.b
 A = Planta.a
+C = [1 0 0 0];
 K = [48.2751,-21.5023,2.0831,-0.9708,-20.4]
 K = [1,-2.5023,2.0831,-0.9708,-0.4]
 s = tf('s')
+
+As = [A(1,:),0;A(2,:),0;A(3,:),0;A(4,:),0;-C(1,:),0]
+Bs = [B;0]
 
 SA = tf(1) %1
 SC = -K(1,5)/s  %2
