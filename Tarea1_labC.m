@@ -161,6 +161,26 @@ C = [1 0 0 0];
 K = [48.2751,-21.5023,2.0831,-0.9708,-20.4]
 K = [1,-2.5023,2.0831,-0.9708,-0.4]
 s = tf('s')
+% Definir el sobrepico y tiempo de asentamiento deseados
+OS = 2;   % Sobrepico del 2%
+TS = 4;   % Tiempo de asentamiento de 4 segundos
+
+% Cálculo del factor de amortiguamiento (damping ratio) ζ
+shi = -log(OS/100) / sqrt(pi^2 + log(OS/100)^2);
+
+% Cálculo de la frecuencia natural w
+w = 4 / (TS * shi);
+
+% Cálculo de los polos P1 y P2
+P1 = -shi * w + w * sqrt(1 - shi^2) * 1i;
+P2 = -shi * w - w * sqrt(1 - shi^2) * 1i;
+
+% Mostrar los polos calculados
+disp('Polos calculados:');
+disp(P1);
+disp(P2);
+
+
 
 As = [A(1,:),0;A(2,:),0;A(3,:),0;A(4,:),0;-C(1,:),0]
 Bs = [B;0]
